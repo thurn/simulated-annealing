@@ -1,9 +1,9 @@
+#!/usr/bin/env ruby
 # Implements the general Simulated Annealing algorithm in Ruby
-# Author(s): Derek Thurn
 
 DEBUG=true
 DEFAULT_RESTART_PROB=0.001
-DEFAULT_MAX_TIME = 1000000
+DEFAULT_MAX_TIME = 30000
 DEFAULT_MAX_ENERGY = 0
 DEFAULT_ALPHA = 0.95
 
@@ -109,7 +109,6 @@ def simulate_annealing(initial_state,
   if DEBUG
     puts "Final Time: #{cumulative_time}"
     puts "Final Energy: #{current_energy}"
-    puts "Final Temperature: #{temperature.call(current_time)}"
   end
 
   best_state
