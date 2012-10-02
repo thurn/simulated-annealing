@@ -33,8 +33,8 @@ end
 # The probability that a transition will occur between the provided energy
 # levels at the supplied temperature
 def default_transition_fn(e, e_prime, temp)
-  return 1 if e_prime > e
-  Math.exp((e_prime-e) * (1.0 - temp))
+  return 1 if e_prime < e
+  Math.exp((e-e_prime) * (1.0 - temp))
 end
 
 # Performs the general Simulated Annealing algorithm.
@@ -78,7 +78,7 @@ def simulate_annealing(initial_state,
   current_time = 0 # time since last restart
   cumulative_time = 0 # overall time
 
-  while cumulative_time < max_time and current_energy < max_energy
+  while cumulative_time < max_time and current_energy > max_energy
 
     new_state = if rand < restart_probability
       current_time = 0
@@ -97,7 +97,7 @@ def simulate_annealing(initial_state,
     end
 
     # Check if we have a new candidate solution
-    if new_energy > best_energy
+    if new_energy < best_energy
       best_state = new_state.clone
       best_energy = new_energy
     end
